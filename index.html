@@ -1292,41 +1292,22 @@
       pointer-events: none;
     }
 
-    #contact::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 80% 50%, rgba(245, 166, 35, 0.07), transparent 55%),
-                  radial-gradient(circle at 10% 90%, rgba(126, 232, 250, 0.05), transparent 50%);
-      z-index: -1;
-      pointer-events: none;
+  
+
+
+
+    body.is-night .celestial-glow {
+      background: radial-gradient(circle, #f6f8fc, #cbd4e3 55%, transparent 75%);
+      box-shadow: 0 0 24px rgba(203, 212, 227, 0.45);
     }
 
-    #earth-horizon {
-      position: absolute;
-      bottom: -4vw;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 160vw;
-      max-width: 2000px;
-      aspect-ratio: 604 / 377;
-      background-image: url('assets/earth-pixel.png');
-      background-size: cover;
-      background-position: top center;
-      image-rendering: pixelated;
-      border-radius: 50% 50% 0 0 / 8% 8% 0 0;
-      box-shadow: 0 -20px 100px 30px rgba(126, 232, 250, 0.15);
-      opacity: 0.95;
-      z-index: -1;
-      pointer-events: none;
+    @keyframes earthDrift {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
     }
 
-    #earth-horizon::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, var(--color-bg-start) 0%, transparent 18%);
-      pointer-events: none;
+    @media (max-width: 768px) {
+      .earth-mini { top: 3%; right: 4%; width: 70px; height: 70px; }
     }
 
     .c-label {
@@ -1447,26 +1428,24 @@
        CUSTOM CURSOR
        ══════════════════════════════════════════════════ */
     #cur {
-      width: 22px;
-      height: 22px;
+      width: 30px;
+      height: 30px;
       position: fixed;
       top: 0;
       left: 0;
       pointer-events: none;
       z-index: 9999;
       transform-origin: center center;
-      transition: opacity 0.4s ease, transform 0.9s cubic-bezier(.3,.6,.4,1);
-      filter: drop-shadow(0 0 6px rgba(245, 166, 35, 0.5));
+      font-size: 22px;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4)) drop-shadow(0 0 8px rgba(126,232,250,0.35));
+      will-change: transform;
     }
 
-    #cur svg { width: 100%; height: 100%; display: block; }
-
-    #cur.blast-off {
-      transform: translateY(-120vh) rotate(0deg) !important;
-      opacity: 0;
-    }
-
-    #cur.hidden-cur { opacity: 0; }
+    #cur span { display: block; }
 
     /* ══════════════════════════════════════════════════
        SECOND BRAIN — Obsidian-style force graph
@@ -2059,7 +2038,7 @@
 <!-- ════════════════════════════════════════════════════
      CASSETTE PLAYER — Click to play / change track
      ════════════════════════════════════════════════════ -->
-<div class="main" id="cassette" title="Click to play music">
+<div class="main" id="cassette" title="Click to play/pause · double-click for next track">
   <div class="card">
     <div class="ups">
       <div class="screw1">+</div>
@@ -2101,13 +2080,7 @@
      CUSTOM CURSORS
      ════════════════════════════════════════════════════ -->
 <div id="cur">
-  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M12 2c2.5 2.2 4 5.6 4 9.5 0 2-0.5 3.8-1.2 5.2L12 19l-2.8-2.3C8.5 15.3 8 13.5 8 11.5 8 7.6 9.5 4.2 12 2z" fill="var(--color-accent-cyan)"/>
-    <circle cx="12" cy="10" r="1.6" fill="var(--color-bg-start)"/>
-    <path d="M8 13c-1.6 0.4-2.6 1.8-2.8 4 1.8-0.4 3.2-1.4 3.8-2.8L8 13z" fill="var(--color-accent-orange)"/>
-    <path d="M16 13c1.6 0.4 2.6 1.8 2.8 4-1.8-0.4-3.2-1.4-3.8-2.8L16 13z" fill="var(--color-accent-orange)"/>
-    <path d="M10.5 17.5h3l-1 3.5-1-1.2-1 1.2z" fill="var(--color-accent-sun)"/>
-  </svg>
+  <span>🧑‍🚀</span>
 </div>
 
 <!-- ════════════════════════════════════════════════════
@@ -2252,6 +2225,9 @@
           <div class="about-portrait">
             <img src="assets/profile.png" alt="Vishal Tomar" loading="lazy">
           </div>
+          <a href="https://imtnagpur.wordpress.com/2024/10/02/life-light/" target="_blank" rel="noopener noreferrer" style="display:block; text-align:center; font-family:var(--font-display); font-size:0.6rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--color-accent-cyan); opacity:0.7; margin:-0.6rem 0 1rem; text-decoration:none;">
+            Featured in IMTN — "Life, Light" <i class="fas fa-arrow-up-right-from-square" style="font-size:0.85em;"></i>
+          </a>
           <div class="stat">
             <div class="s-num">0→1</div>
             <div class="s-lbl">NitroCapital built from scratch</div>
@@ -2435,8 +2411,8 @@
           <div class="e-role">PGDM — Finance & Marketing</div>
           <div class="e-company">IMT Nagpur — Graduate 2025</div>
           <ul class="e-points">
-            <li>Head, Inshades Art Club — led creative direction across campus events</li>
-            <li>Rangmanch Drama Club · Alumni Committee</li>
+            <li>Head, Inshades Art Club — led creative direction across campus events <a href="https://www.instagram.com/inshades.imtn/" target="_blank" rel="noopener noreferrer" class="linkedin-icon" title="Inshades Art Club on Instagram"><i class="fab fa-instagram"></i></a></li>
+            <li>Rangmanch Drama Club <a href="https://www.instagram.com/rangmanch.imtn/" target="_blank" rel="noopener noreferrer" class="linkedin-icon" title="Rangmanch on Instagram"><i class="fab fa-instagram"></i></a> · Alumni Committee — ran content for Alcom <a href="https://www.instagram.com/alcom_imtnagpur/" target="_blank" rel="noopener noreferrer" class="linkedin-icon" title="Alcom on Instagram"><i class="fab fa-instagram"></i></a></li>
             <li>Built strong foundations in finance, marketing, and systems thinking</li>
           </ul>
         </div>
@@ -2535,11 +2511,11 @@
           <div class="int-title">Basketball</div>
           <div class="int-sub">Spacing and timing matter more than raw effort.</div>
         </div>
-        <div class="int-card" data-reveal="pop" data-reveal-delay="130">
+        <a class="int-card" href="https://www.instagram.com/inshades.imtn/" target="_blank" rel="noopener noreferrer" data-reveal="pop" data-reveal-delay="130" style="text-decoration:none;">
           <div class="int-icon">✏️</div>
-          <div class="int-title">Sketching</div>
+          <div class="int-title">Sketching <i class="fab fa-instagram" style="font-size:0.8em; opacity:0.6;"></i></div>
           <div class="int-sub">Led Inshades Art Club at IMT. Drawing is another way of seeing.</div>
-        </div>
+        </a>
         <div class="int-card" data-reveal="pop" data-reveal-delay="210">
           <div class="int-icon">✈️</div>
           <div class="int-title">Travelling</div>
@@ -2601,6 +2577,10 @@
     <!-- ─── CONTACT ─── -->
     <section id="contact">
       <div id="earth-horizon"></div>
+      <div class="earth-mini" data-reveal="fade" data-reveal-delay="200">
+        <div class="celestial-glow"></div>
+        <img src="assets/earth-night.png" alt="Earth from orbit" loading="lazy">
+      </div>
       <div class="c-label" data-reveal="fade">Let's connect</div>
       <h2 class="c-head" data-reveal="slide-up">
         LET'S<br><span class="acc">TALK.</span>
@@ -2858,36 +2838,32 @@
   if (!cur) return;
 
   let mx = window.innerWidth / 2, my = window.innerHeight / 2;
-  let active = true;
+  let cx = mx, cy = my;
+  let t = Math.random() * 1000;
+  const phaseX = Math.random() * Math.PI * 2;
+  const phaseY = Math.random() * Math.PI * 2;
 
   document.addEventListener('mousemove', e => {
     mx = e.clientX;
     my = e.clientY;
-    if (active) {
-      cur.style.transform = `translate(${mx - 11}px, ${my - 11}px)`;
-    }
   });
 
-  function cycle() {
-    active = false;
-    cur.classList.add('blast-off');
+  (function loop() {
+    t += 0.016;
 
-    setTimeout(() => {
-      cur.classList.add('hidden-cur');
-      cur.classList.remove('blast-off');
-      cur.style.transition = 'none';
-      cur.style.transform = `translate(${mx - 11}px, ${my - 11}px)`;
+    // Lazily drift toward the pointer
+    cx += (mx - cx) * 0.06;
+    cy += (my - cy) * 0.06;
 
-      setTimeout(() => {
-        cur.style.transition = 'opacity 0.4s ease, transform 0.9s cubic-bezier(.3,.6,.4,1)';
-        cur.classList.remove('hidden-cur');
-        active = true;
-        setTimeout(cycle, 30000);
-      }, 5000);
-    }, 900);
-  }
+    // Wander around the pointer in every direction, not just one
+    const wanderX = Math.sin(t * 0.9 + phaseX) * 14 + Math.sin(t * 0.37) * 6;
+    const wanderY = Math.cos(t * 0.7 + phaseY) * 14 + Math.cos(t * 0.45) * 6;
+    const tilt = Math.sin(t * 0.5 + phaseX) * 12;
 
-  setTimeout(cycle, 30000);
+    cur.style.transform = `translate(${cx + wanderX - 15}px, ${cy + wanderY - 15}px) rotate(${tilt}deg)`;
+
+    requestAnimationFrame(loop);
+  })();
 })();
 
 /* ════════════════════════════════════════════════════
@@ -3181,7 +3157,17 @@ window.addEventListener('error', function() {
 });
 
 /* ════════════════════════════════════════════════════
-   CASSETTE PLAYER — click to play / cycle tracks
+   DAY / NIGHT — sun becomes moon based on visitor's clock
+   ════════════════════════════════════════════════════ */
+(function() {
+  const hour = new Date().getHours();
+  if (hour >= 19 || hour < 6) {
+    document.body.classList.add('is-night');
+  }
+})();
+
+/* ════════════════════════════════════════════════════
+   CASSETTE PLAYER — click to play/pause, double-click to skip
    ════════════════════════════════════════════════════ */
 (function() {
   const cassette = document.getElementById('cassette');
@@ -3196,25 +3182,53 @@ window.addEventListener('error', function() {
     { src: 'assets/music/track3.mp3', name: 'TRACK 03' }
   ];
 
-  let idx = -1;
+  let idx = 0;
+  let loaded = false;
   const defaultLabel = label ? label.textContent : '2×30min';
+  let clickTimer = null;
 
-  cassette.addEventListener('click', () => {
-    idx = (idx + 1) % tracks.length;
-    audio.src = tracks[idx].src;
+  function play(i) {
+    audio.src = tracks[i].src;
     audio.currentTime = 0;
+    loaded = true;
     audio.play().then(() => {
       cassette.classList.add('playing');
-      if (label) label.textContent = tracks[idx].name;
+      if (label) label.textContent = tracks[i].name;
     }).catch(() => {
-      // File missing or blocked — reset visuals
       cassette.classList.remove('playing');
       if (label) label.textContent = defaultLabel;
     });
+  }
+
+  cassette.addEventListener('click', () => {
+    if (clickTimer) {
+      // Second click within window → double-click, skip to next track
+      clearTimeout(clickTimer);
+      clickTimer = null;
+      idx = (idx + 1) % tracks.length;
+      play(idx);
+      return;
+    }
+
+    clickTimer = setTimeout(() => {
+      clickTimer = null;
+      if (!loaded) {
+        play(idx);
+      } else if (audio.paused) {
+        audio.play().then(() => {
+          cassette.classList.add('playing');
+          if (label) label.textContent = tracks[idx].name;
+        }).catch(() => {});
+      } else {
+        audio.pause();
+        cassette.classList.remove('playing');
+      }
+    }, 280);
   });
 
   audio.addEventListener('ended', () => {
     cassette.classList.remove('playing');
+    loaded = false;
     if (label) label.textContent = defaultLabel;
   });
 })();
