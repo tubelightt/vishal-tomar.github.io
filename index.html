@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vishal Tomar — Builder, Thinker, Operator</title>
   <meta name="description" content="Vishal Tomar — PGDM Finance & Marketing. Built NitroCapital from scratch. PM / APM / Growth / Founder's Office." />
+  <meta property="og:title" content="Vishal Tomar — Builder, Thinker, Operator" />
+  <meta property="og:description" content="PGDM Finance & Marketing. Built a fintech product from nothing. Now looking for the next thing worth building." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -129,33 +133,6 @@
     }
 
     /* Ambient sun glow */
-    #sun-glow {
-      position: fixed;
-      z-index: 0;
-      pointer-events: none;
-      opacity: 0.15;
-    }
-
-    #sun-glow .sun-core {
-      width: 120px;
-      height: 120px;
-      background: radial-gradient(circle, var(--color-accent-sun), var(--color-accent-orange), transparent);
-      border-radius: 50%;
-      filter: blur(40px);
-      animation: sunBreath 5s ease-in-out infinite;
-    }
-
-    #sun-glow .sun-ring {
-      position: absolute;
-      top: -20px;
-      left: -20px;
-      width: 160px;
-      height: 160px;
-      border: 1px solid rgba(245, 166, 35, 0.15);
-      border-radius: 50%;
-      animation: sunOrbit 8s linear infinite;
-    }
-
     @keyframes sunBreath {
       0%, 100% { transform: scale(1); opacity: 0.6; }
       50%      { transform: scale(1.15); opacity: 1; }
@@ -169,7 +146,10 @@
     /* Parallax wrapper */
     #parallax-layer {
       position: fixed;
-      inset: 0;
+      top: -50vh;
+      left: 0;
+      right: 0;
+      height: 200vh;
       z-index: 0;
       pointer-events: none;
       will-change: transform;
@@ -290,17 +270,49 @@
     #logo-placeholder {
       width: 40px;
       height: 40px;
-      border-radius: 50%;
-      border: 1.5px dashed var(--color-accent-cyan);
       flex-shrink: 0;
-      background: rgba(126, 232, 250, 0.05);
-      box-shadow: 0 0 15px rgba(126, 232, 250, 0.1);
-      transition: border-color 0.3s, box-shadow 0.3s;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    #logo-placeholder:hover {
-      border-color: var(--color-accent-sun);
-      box-shadow: 0 0 20px rgba(245, 166, 35, 0.2);
+    #logo-placeholder .logo-core {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #fff, var(--color-accent-sun) 60%, var(--color-accent-orange));
+      box-shadow:
+        0 0 10px 2px rgba(245, 166, 35, 0.7),
+        0 0 22px 6px rgba(245, 166, 35, 0.35),
+        0 0 40px 14px rgba(245, 166, 35, 0.15);
+      animation: sunBreath 5s ease-in-out infinite;
+      position: relative;
+      z-index: 2;
+      transition: box-shadow 0.3s;
+    }
+
+    #logo-placeholder .logo-rays {
+      position: absolute;
+      inset: 0;
+      animation: sunOrbit 14s linear infinite;
+    }
+
+    #logo-placeholder .logo-rays span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 1.5px;
+      height: 18px;
+      background: linear-gradient(to bottom, rgba(245, 166, 35, 0.65), transparent);
+      transform-origin: top center;
+    }
+
+    #logo-placeholder:hover .logo-core {
+      box-shadow:
+        0 0 14px 4px rgba(245, 166, 35, 0.9),
+        0 0 30px 10px rgba(245, 166, 35, 0.45),
+        0 0 55px 20px rgba(245, 166, 35, 0.2);
     }
 
     .sb-logo-text {
@@ -401,7 +413,7 @@
       align-items: center;
       gap: 0.5rem;
       font-family: var(--font-body);
-      font-size: clamp(0.45rem, 0.9vw, 0.52rem);
+      font-size: clamp(0.55rem, 1vw, 0.62rem);
       color: var(--color-text-muted);
       letter-spacing: 0.08em;
       margin-bottom: 0.6rem;
@@ -429,7 +441,7 @@
 
     .sb-link {
       font-family: var(--font-body);
-      font-size: clamp(0.45rem, 0.9vw, 0.5rem);
+      font-size: clamp(0.55rem, 1vw, 0.62rem);
       color: var(--color-text-muted);
       text-decoration: none;
       letter-spacing: 0.06em;
@@ -444,7 +456,7 @@
     }
 
     .sb-link i {
-      font-size: 0.65rem;
+      font-size: 0.78rem;
     }
 
     /* Hamburger */
@@ -793,6 +805,39 @@
       gap: 0.9rem;
     }
 
+    .about-portrait {
+      grid-column: 1 / -1;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--color-border);
+      position: relative;
+      aspect-ratio: 4 / 3;
+      margin-bottom: 0.2rem;
+    }
+
+    .about-portrait img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 25%;
+      display: block;
+      filter: grayscale(0.3) contrast(1.05);
+      transition: transform 0.5s var(--ease-spring), filter 0.5s;
+    }
+
+    .about-portrait:hover img {
+      transform: scale(1.04);
+      filter: grayscale(0) contrast(1.1);
+    }
+
+    .about-portrait::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 60%, rgba(10,14,23,0.6));
+      pointer-events: none;
+    }
+
     .stat {
       border: 1px solid var(--color-border);
       padding: clamp(0.8rem, 2vw, 1.2rem);
@@ -1099,9 +1144,9 @@
 
     .sg-title {
       font-family: var(--font-display);
-      font-size: clamp(0.45rem, 0.9vw, 0.52rem);
+      font-size: clamp(0.7rem, 1.3vw, 0.85rem);
       color: var(--color-accent-cyan);
-      letter-spacing: 0.2em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       margin-bottom: 0.9rem;
       padding-bottom: 0.5rem;
@@ -1112,25 +1157,51 @@
     .sk-list {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.4rem;
+      gap: 0.5rem;
     }
 
     .chip {
       font-family: var(--font-body);
-      font-size: clamp(0.48rem, 0.9vw, 0.55rem);
+      font-size: clamp(0.75rem, 1.2vw, 0.85rem);
       color: var(--color-text-muted);
-      background: rgba(126, 232, 250, 0.03);
-      border: 1px solid var(--color-border);
-      padding: 0.25rem 0.6rem;
-      border-radius: 20px;
-      transition: border-color 0.3s, color 0.3s, box-shadow 0.3s;
+      background: transparent;
+      border: none;
+      padding: 0.4rem 0.85rem;
+      transition: color 0.3s;
+      display: inline-block;
     }
 
     .chip:hover {
-      border-color: var(--color-accent-cyan);
       color: var(--color-accent-cyan);
-      box-shadow: 0 0 15px rgba(126, 232, 250, 0.1);
+      animation-play-state: running;
     }
+
+    /* ── Per-chip hover animations — only active on hover ── */
+    @keyframes chipBounce  { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-7px)} }
+    @keyframes chipWave    { 0%,100%{transform:translateY(0) rotate(0deg)} 25%{transform:translateY(-3px) rotate(2deg)} 75%{transform:translateY(3px) rotate(-2deg)} }
+    @keyframes chipPulse   { 0%,100%{transform:scale(1)} 50%{transform:scale(1.12)} }
+    @keyframes chipShrink  { 0%,100%{transform:scale(1)} 50%{transform:scale(0.88)} }
+    @keyframes chipDrift   { 0%,100%{transform:translateX(0)} 50%{transform:translateX(6px)} }
+    @keyframes chipSpinSm  { 0%,100%{transform:rotate(0deg)} 50%{transform:rotate(6deg)} }
+    @keyframes chipSpinNeg { 0%,100%{transform:rotate(0deg)} 50%{transform:rotate(-6deg)} }
+    @keyframes chipFloat   { 0%{transform:translate(0,0)} 33%{transform:translate(3px,-5px)} 66%{transform:translate(-3px,3px)} 100%{transform:translate(0,0)} }
+    @keyframes chipBoom    { 0%,100%{transform:scale(1); opacity:1} 50%{transform:scale(1.25); opacity:0.7} }
+    @keyframes chipTilt    { 0%,100%{transform:perspective(200px) rotateX(0deg)} 50%{transform:perspective(200px) rotateX(18deg)} }
+    @keyframes chipSlide   { 0%,100%{transform:translateY(0)} 50%{transform:translateY(5px)} }
+    @keyframes chipJelly   { 0%,100%{transform:scale(1,1)} 30%{transform:scale(1.1,0.9)} 60%{transform:scale(0.95,1.05)} }
+
+    .chip.anim-bounce:hover  { animation: chipBounce 0.8s ease-in-out infinite; }
+    .chip.anim-wave:hover    { animation: chipWave 1s ease-in-out infinite; }
+    .chip.anim-pulse:hover   { animation: chipPulse 0.8s ease-in-out infinite; }
+    .chip.anim-shrink:hover  { animation: chipShrink 0.8s ease-in-out infinite; }
+    .chip.anim-drift:hover   { animation: chipDrift 0.9s ease-in-out infinite; }
+    .chip.anim-spinsm:hover  { animation: chipSpinSm 0.7s ease-in-out infinite; }
+    .chip.anim-spinneg:hover { animation: chipSpinNeg 0.7s ease-in-out infinite; }
+    .chip.anim-float:hover   { animation: chipFloat 1.2s ease-in-out infinite; }
+    .chip.anim-boom:hover    { animation: chipBoom 0.9s ease-in-out infinite; }
+    .chip.anim-tilt:hover    { animation: chipTilt 0.8s ease-in-out infinite; }
+    .chip.anim-slide:hover   { animation: chipSlide 0.8s ease-in-out infinite; }
+    .chip.anim-jelly:hover   { animation: chipJelly 0.7s ease-in-out infinite; }
 
     .int-row {
       display: grid;
@@ -1195,6 +1266,67 @@
       flex-direction: column;
       justify-content: center;
       min-height: 90vh;
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    #contact::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      right: -8%;
+      transform: translateY(-50%);
+      width: min(58vw, 640px);
+      aspect-ratio: 1 / 1;
+      background-image: url('assets/contact-dither.png');
+      background-size: cover;
+      background-position: center;
+      image-rendering: pixelated;
+      opacity: 0.16;
+      mix-blend-mode: screen;
+      filter: contrast(1.2);
+      -webkit-mask-image: radial-gradient(circle at 60% 50%, #000 45%, transparent 75%);
+      mask-image: radial-gradient(circle at 60% 50%, #000 45%, transparent 75%);
+      z-index: -2;
+      pointer-events: none;
+    }
+
+    #contact::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 80% 50%, rgba(245, 166, 35, 0.07), transparent 55%),
+                  radial-gradient(circle at 10% 90%, rgba(126, 232, 250, 0.05), transparent 50%);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    #earth-horizon {
+      position: absolute;
+      bottom: -4vw;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 160vw;
+      max-width: 2000px;
+      aspect-ratio: 604 / 377;
+      background-image: url('assets/earth-pixel.png');
+      background-size: cover;
+      background-position: top center;
+      image-rendering: pixelated;
+      border-radius: 50% 50% 0 0 / 8% 8% 0 0;
+      box-shadow: 0 -20px 100px 30px rgba(126, 232, 250, 0.15);
+      opacity: 0.95;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    #earth-horizon::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, var(--color-bg-start) 0%, transparent 18%);
+      pointer-events: none;
     }
 
     .c-label {
@@ -1315,30 +1447,205 @@
        CUSTOM CURSOR
        ══════════════════════════════════════════════════ */
     #cur {
-      width: 6px;
-      height: 6px;
-      background: var(--color-accent-sun);
-      border-radius: 50%;
+      width: 22px;
+      height: 22px;
       position: fixed;
       top: 0;
       left: 0;
       pointer-events: none;
       z-index: 9999;
-      mix-blend-mode: difference;
-      transition: opacity 0.3s;
+      transform-origin: center center;
+      transition: opacity 0.4s ease, transform 0.9s cubic-bezier(.3,.6,.4,1);
+      filter: drop-shadow(0 0 6px rgba(245, 166, 35, 0.5));
     }
 
-    #cur-ring {
-      width: 32px;
-      height: 32px;
-      border: 1px solid rgba(245, 166, 35, 0.3);
-      border-radius: 50%;
-      position: fixed;
-      top: 0;
-      left: 0;
+    #cur svg { width: 100%; height: 100%; display: block; }
+
+    #cur.blast-off {
+      transform: translateY(-120vh) rotate(0deg) !important;
+      opacity: 0;
+    }
+
+    #cur.hidden-cur { opacity: 0; }
+
+    /* ══════════════════════════════════════════════════
+       SECOND BRAIN — Obsidian-style force graph
+       ══════════════════════════════════════════════════ */
+    .brain-wrap {
+      position: relative;
+      width: 100%;
+      height: 640px;
+      margin-top: 2rem;
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      overflow: hidden;
+      background: radial-gradient(circle at 50% 50%, rgba(126,232,250,0.05), transparent 70%);
+      cursor: grab;
+    }
+
+    .brain-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
       pointer-events: none;
-      z-index: 9998;
-      transition: border-color 0.3s, transform 0.1s;
+    }
+
+    .brain-edge {
+      stroke: var(--color-border-hover);
+      stroke-width: 1;
+      opacity: 0.3;
+      transition: stroke 0.2s ease, opacity 0.2s ease;
+    }
+
+    .brain-edge.lit {
+      stroke: var(--color-accent-cyan);
+      opacity: 0.9;
+    }
+
+    .brain-node {
+      position: absolute;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.5rem 0.95rem;
+      border-radius: 999px;
+      border: 1px solid var(--color-border);
+      background: rgba(10,14,23,0.78);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      font-family: var(--font-display);
+      font-size: 0.62rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--color-text);
+      white-space: nowrap;
+      cursor: grab;
+      user-select: none;
+      touch-action: none;
+      transform: translate(-50%, -50%);
+      transition: box-shadow 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
+      z-index: 2;
+    }
+
+    .brain-node:active { cursor: grabbing; }
+
+    .brain-node.dim { opacity: 0.22; }
+
+    .brain-node.active {
+      border-color: var(--color-accent-cyan);
+      box-shadow: 0 0 16px rgba(126,232,250,0.45);
+      z-index: 3;
+    }
+
+    .brain-node.center {
+      font-weight: 700;
+      font-size: 0.85rem;
+      border-color: var(--color-accent-sun);
+      background: rgba(245,166,35,0.12);
+      color: var(--color-accent-sun);
+      cursor: default;
+    }
+
+    .brain-node[data-cat="movies"],
+    .brain-node[data-cat="people"]  { border-color: rgba(126,232,250,0.35); }
+    .brain-node[data-cat="books"]   { border-color: rgba(244,211,94,0.35); }
+    .brain-node[data-cat="series"],
+    .brain-node[data-cat="games"]   { border-color: rgba(255,122,0,0.4); }
+    .brain-node[data-cat="reddit"]  { border-color: rgba(245,166,35,0.35); }
+    .brain-node[data-cat="web"]     { border-color: rgba(255,255,255,0.28); }
+
+    .brain-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem 1.4rem;
+      margin-top: 1rem;
+      font-size: 0.72rem;
+      color: var(--color-text-muted);
+    }
+
+    .brain-legend span {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .brain-legend i {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .brain-panel {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      max-width: 280px;
+      background: rgba(10,14,23,0.94);
+      border: 1px solid var(--color-border-hover);
+      border-radius: 10px;
+      padding: 1rem 1.2rem;
+      font-size: 0.85rem;
+      line-height: 1.55;
+      color: var(--color-text);
+      z-index: 5;
+      opacity: 0;
+      transform: translateY(-8px);
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .brain-panel.show {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .brain-panel .bp-cat {
+      font-family: var(--font-display);
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-accent-cyan);
+      margin-bottom: 0.35rem;
+    }
+
+    .brain-panel .bp-title {
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+      padding-right: 1.2rem;
+    }
+
+    .brain-panel .bp-note {
+      color: var(--color-text-muted);
+      font-weight: 300;
+    }
+
+    .brain-panel .bp-close {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.65rem;
+      background: none;
+      border: none;
+      color: var(--color-text-muted);
+      cursor: pointer;
+      font-size: 0.85rem;
+      line-height: 1;
+      padding: 0.2rem;
+    }
+
+    .brain-hint {
+      position: absolute;
+      bottom: 0.8rem;
+      left: 1.1rem;
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      opacity: 0.55;
+      pointer-events: none;
     }
 
     /* ══════════════════════════════════════════════════
@@ -1352,8 +1659,8 @@
       .int-row { grid-template-columns: 1fr 1fr; }
       #hero { min-height: auto; padding-top: 4rem; padding-bottom: 4rem; }
       #contact { min-height: auto; padding-top: 4rem; padding-bottom: 4rem; }
-      #sun-glow .sun-core { width: 80px; height: 80px; filter: blur(30px); }
-      #sun-glow .sun-ring { width: 110px; height: 110px; top: -15px; left: -15px; }
+      #contact::before { width: 80vw; opacity: 0.1; right: -20%; }
+      .main { transform: scale(0.55); right: -1.5rem; top: -0.5rem; }
     }
 
     /* ══════════════════════════════════════════════════
@@ -1464,17 +1771,16 @@
         padding: 1rem;
       }
 
-      /* Disable heavy blur on mobile */
-      #sun-glow .sun-core {
-        filter: blur(15px);
-        width: 60px;
-        height: 60px;
-      }
-      #sun-glow .sun-ring {
-        display: none;
-      }
-
       /* Reduce star count on mobile — handled in JS */
+
+      .brain-wrap { height: 460px; }
+      .brain-node { font-size: 0.5rem; padding: 0.4rem 0.7rem; }
+      .brain-node.center { font-size: 0.65rem; }
+      .brain-panel {
+        left: 1rem; right: 1rem; top: auto; bottom: 1rem;
+        max-width: none;
+      }
+      .brain-hint { display: none; }
     }
 
     /* ══════════════════════════════════════════════════
@@ -1503,9 +1809,163 @@
       .c-links { flex-direction: column; gap: 0.7rem; }
       body { overflow-x: hidden; }
 
-      #sun-glow { display: none; }
+      .main { transform: scale(0.4); right: -2.5rem; }
     }
+    /* ══════════════════════════════════════════════════
+       CASSETTE PLAYER — replaces ambient sun glow
+       ══════════════════════════════════════════════════ */
+    .main {
+      position: fixed;
+      top: 1.1rem;
+      right: 1.4rem;
+      z-index: 50;
+      cursor: pointer;
+      transform-origin: top right;
+    }
+
+    .main .card {
+      width: 168px;
+      height: 102px;
+      background: #20232c;
+      border: 1px solid var(--color-border);
+      border-radius: 10px;
+      padding: 8px 10px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      transition: transform 0.25s var(--ease-spring), box-shadow 0.25s;
+    }
+
+    .main:hover .card {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 14px 36px rgba(245,166,35,0.18);
+    }
+
+    .ups, .downs {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 1px;
+    }
+
+    .screw1, .screw2, .screw3, .screw4, .screw5 {
+      color: #565a66;
+      font-size: 9px;
+      line-height: 1;
+      font-family: var(--font-display);
+    }
+
+    .card1 {
+      background: #15171f;
+      border-radius: 6px;
+      margin-top: 4px;
+      padding: 7px 9px 8px;
+      position: relative;
+    }
+
+    .line1, .line2 {
+      height: 1px;
+      background: rgba(255,255,255,0.12);
+      margin: 3px 18px;
+    }
+
+    .yl {
+      margin-top: 8px;
+      height: 38px;
+      border-radius: 4px;
+      background: linear-gradient(135deg, var(--color-accent-sun), var(--color-accent-orange));
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 8px;
+      position: relative;
+    }
+
+    .roll {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .s_wheel, .e_wheel {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #15171f;
+      border: 2px solid #444a55;
+      position: relative;
+      transition: animation 0.2s;
+    }
+
+    .s_wheel::after, .e_wheel::after {
+      content: '';
+      position: absolute;
+      inset: 4px;
+      border-radius: 50%;
+      background: #6c727f;
+    }
+
+    #cassette.playing .s_wheel,
+    #cassette.playing .e_wheel {
+      animation: reelSpin 1.1s linear infinite;
+    }
+
+    @keyframes reelSpin {
+      to { transform: rotate(360deg); }
+    }
+
+    .tape {
+      width: 24px;
+      height: 2px;
+      background: rgba(21,23,31,0.5);
+    }
+
+    .num {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.3rem;
+      color: #15171f;
+      line-height: 1;
+    }
+
+    .or {
+      margin-top: 6px;
+      text-align: right;
+    }
+
+    .time {
+      font-size: 0.6rem;
+      letter-spacing: 0.08em;
+      color: var(--color-text-muted);
+      margin: 0;
+    }
+
+    .card2_main {
+      display: flex;
+      justify-content: center;
+      margin-top: 6px;
+    }
+
+    .card2 {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .c1, .c2 {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #15171f;
+      border: 1px solid #3a3f4a;
+    }
+
+    .t1, .t2 {
+      width: 20px;
+      height: 3px;
+      background: #15171f;
+      border-radius: 1px;
+    }
+
   </style>
+
 </head>
 <body>
 
@@ -1594,19 +2054,61 @@
       <circle cx="950" cy="400" r="2" fill="rgba(126,232,250,0.2)" />
     </svg>
   </div>
+</div>
 
-  <!-- Ambient sun glow -->
-  <div id="sun-glow" style="top: -60px; right: -40px;">
-    <div class="sun-ring"></div>
-    <div class="sun-core"></div>
+<!-- ════════════════════════════════════════════════════
+     CASSETTE PLAYER — Click to play / change track
+     ════════════════════════════════════════════════════ -->
+<div class="main" id="cassette" title="Click to play music">
+  <div class="card">
+    <div class="ups">
+      <div class="screw1">+</div>
+      <div class="screw2">+</div>
+    </div>
+    <div class="card1">
+      <div class="line1"></div>
+      <div class="line2"></div>
+      <div class="yl">
+        <div class="roll">
+          <div class="s_wheel"></div>
+          <div class="tape"></div>
+          <div class="e_wheel"></div>
+        </div>
+        <p class="num">90</p>
+      </div>
+      <div class="or">
+        <p class="time" id="cassetteLabel">2×30min</p>
+      </div>
+    </div>
+    <div class="card2_main">
+      <div class="card2">
+        <div class="c1"></div>
+        <div class="t1"></div>
+        <div class="screw5">+</div>
+        <div class="t2"></div>
+        <div class="c2"></div>
+      </div>
+    </div>
+    <div class="downs">
+      <div class="screw3">+</div>
+      <div class="screw4">+</div>
+    </div>
   </div>
 </div>
+<audio id="cassetteAudio" preload="none"></audio>
 
 <!-- ════════════════════════════════════════════════════
      CUSTOM CURSORS
      ════════════════════════════════════════════════════ -->
-<div id="cur"></div>
-<div id="cur-ring"></div>
+<div id="cur">
+  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 2c2.5 2.2 4 5.6 4 9.5 0 2-0.5 3.8-1.2 5.2L12 19l-2.8-2.3C8.5 15.3 8 13.5 8 11.5 8 7.6 9.5 4.2 12 2z" fill="var(--color-accent-cyan)"/>
+    <circle cx="12" cy="10" r="1.6" fill="var(--color-bg-start)"/>
+    <path d="M8 13c-1.6 0.4-2.6 1.8-2.8 4 1.8-0.4 3.2-1.4 3.8-2.8L8 13z" fill="var(--color-accent-orange)"/>
+    <path d="M16 13c1.6 0.4 2.6 1.8 2.8 4-1.8-0.4-3.2-1.4-3.8-2.8L16 13z" fill="var(--color-accent-orange)"/>
+    <path d="M10.5 17.5h3l-1 3.5-1-1.2-1 1.2z" fill="var(--color-accent-sun)"/>
+  </svg>
+</div>
 
 <!-- ════════════════════════════════════════════════════
      MAIN LAYOUT
@@ -1616,9 +2118,20 @@
   <!-- ─── SIDEBAR ─── -->
   <aside class="sidebar">
     <div class="sb-logo">
-      <div id="logo-placeholder"></div>
+      <div id="logo-placeholder">
+        <div class="logo-rays">
+          <span style="transform: rotate(0deg);"></span>
+          <span style="transform: rotate(45deg);"></span>
+          <span style="transform: rotate(90deg);"></span>
+          <span style="transform: rotate(135deg);"></span>
+          <span style="transform: rotate(180deg);"></span>
+          <span style="transform: rotate(225deg);"></span>
+          <span style="transform: rotate(270deg);"></span>
+          <span style="transform: rotate(315deg);"></span>
+        </div>
+        <div class="logo-core"></div>
+      </div>
       <div>
-        <div class="sb-logo-text">VT</div>
         <span class="sb-logo-sub">Gurugram, India</span>
       </div>
     </div>
@@ -1656,9 +2169,14 @@
         <span class="nb-num">04</span>
         Toolkit
       </button>
-      <button class="nav-btn" data-section="contact">
+      <button class="nav-btn" data-section="rabbithole">
         <span class="nb-dot"></span>
         <span class="nb-num">05</span>
+        Second Brain
+      </button>
+      <button class="nav-btn" data-section="contact">
+        <span class="nb-dot"></span>
+        <span class="nb-num">06</span>
         Contact
       </button>
     </nav>
@@ -1669,10 +2187,10 @@
         Open to work
       </div>
       <div class="sb-social">
-        <a class="sb-link" href="https://www.linkedin.com/in/vishal-tomar000/" target="_blank">
+        <a class="sb-link" href="https://www.linkedin.com/in/vishal-tomar000/" target="_blank" rel="noopener noreferrer">
           <i class="fab fa-linkedin-in"></i> LinkedIn
         </a>
-        <a class="sb-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=your@email.com" target="_blank">
+        <a class="sb-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=vishaltomar196@email.com" target="_blank" rel="noopener noreferrer">
           <i class="far fa-envelope"></i> Email
         </a>
       </div>
@@ -1695,7 +2213,7 @@
         Built a fintech product from nothing. Now looking for the next thing worth building.
       </p>
       <div class="h-cta" data-reveal="fade" data-reveal-delay="400">
-        <a href="https://www.linkedin.com/in/vishal-tomar000/" target="_blank" class="btn btn-primary">
+        <a href="https://www.linkedin.com/in/vishal-tomar000/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
           Let's talk <i class="fas fa-rocket"></i>
         </a>
         <a href="#work" class="btn btn-cyan">
@@ -1704,16 +2222,12 @@
       </div>
       <div class="h-marquee" data-reveal="fade" data-reveal-delay="300">
         <div class="mq-track">
-                    <span class="mq-item"><span class="dot"></span></span>
-          <span class="mq-item"> <span class="dot"></span></span>
-          <span class="mq-item"> <span class="dot"></span></span>
-          <span class="mq-item">ALERT <span class="dot"></span></span>
-          <span class="mq-item">!!! <span class="dot"></span></span>
-          <span class="mq-item">Not <span class="dot"></span></span>
-          <span class="mq-item">Your <span class="dot"></span></span>
-          <span class="mq-item">Regular <span class="dot"></span></span>
-          <span class="mq-item">Thinker <span class="dot"></span></span>
-          <span class="mq-item">!!! <span class="dot"></span></span>
+          <span class="mq-item">PRODUCT THINKER <span class="dot"></span></span>
+          <span class="mq-item">REFORMED SCIENCE KID <span class="dot"></span></span>
+          <span class="mq-item">PROFESSIONAL OBSERVER <span class="dot"></span></span>
+          <span class="mq-item">BUILT NITROCAPITAL FROM A GOOGLE DOC <span class="dot"></span></span>
+          <span class="mq-item">SARCASM IS A PERSONALITY TYPE <span class="dot"></span></span>
+          <span class="mq-item">CURRENTLY AVAILABLE, SURPRISINGLY <span class="dot"></span></span>
         </div>
       </div>
     </section>
@@ -1735,6 +2249,9 @@
       </div>
       <div class="about-grid">
         <div class="about-stats" data-stagger>
+          <div class="about-portrait">
+            <img src="assets/profile.png" alt="Vishal Tomar" loading="lazy">
+          </div>
           <div class="stat">
             <div class="s-num">0→1</div>
             <div class="s-lbl">NitroCapital built from scratch</div>
@@ -1795,7 +2312,7 @@
         <h2 class="p-title">MISSIONS</h2>
       </div>
       <div class="proj-list">
-        <a class="proj-row live" href="https://nitro-capital-website.onrender.com" target="_blank" data-reveal="rotate-left">
+        <a class="proj-row live" href="https://nitro-capital-website.onrender.com" target="_blank" rel="noopener noreferrer" data-reveal="rotate-left">
           <span class="pn">01</span>
           <div>
             <div class="pt">NITROCAPITAL</div>
@@ -1859,8 +2376,8 @@
           <div class="e-period">NOV 2025 — APR 2026</div>
           <div class="e-role">Founding Team Operator</div>
           <div class="e-company">
-            <a href="https://nitrocommerce.in" target="_blank">NitroCommerce</a> / NitroCapital
-            <a href="https://www.linkedin.com/search/results/all/?keywords=NitroCapital" target="_blank" class="linkedin-icon" title="NitroCapital on LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="https://nitrocommerce.in" target="_blank" rel="noopener noreferrer">NitroCommerce</a> / NitroCapital
+            <a href="https://www.linkedin.com/showcase/nitrocommerce-capital/" target="_blank" rel="noopener noreferrer" class="linkedin-icon" title="NitroCapital on LinkedIn"><i class="fab fa-linkedin"></i></a>
           </div>
           <ul class="e-points">
             <li>Built NitroCapital from zero — brand, marketing channels, CRM, lead gen, and full-stack platform</li>
@@ -1871,7 +2388,18 @@
         </div>
 
         <div class="tl-item" data-reveal="slide-right" data-reveal-delay="100">
-          <div class="e-period">AUG 2024 — APR 2025</div>
+          <div class="e-period">AUG 2025 — OCT 2025</div>
+          <div class="e-role">Social Media & Influencer Outreach Intern</div>
+          <div class="e-company">Netro.io</div>
+          <ul class="e-points">
+            <li>Managed social media presence and content calendar</li>
+            <li>Executed influencer outreach campaigns for brand awareness</li>
+            <li>Analyzed engagement metrics and optimized content strategy</li>
+          </ul>
+        </div>
+
+        <div class="tl-item" data-reveal="slide-right" data-reveal-delay="200">
+          <div class="e-period">APR 2024 — JUN 2024</div>
           <div class="e-role">Equity Research Intern</div>
           <div class="e-company">KRG Consultants</div>
           <ul class="e-points">
@@ -1881,8 +2409,8 @@
           </ul>
         </div>
 
-        <div class="tl-item" data-reveal="slide-right" data-reveal-delay="200">
-          <div class="e-period">JUN 2024 — AUG 2024</div>
+        <div class="tl-item" data-reveal="slide-right" data-reveal-delay="300">
+          <div class="e-period">APR 2024 — JUN 2024</div>
           <div class="e-role">Mutual Fund Distribution Intern</div>
           <div class="e-company">Nippon India Mutual Funds</div>
           <ul class="e-points">
@@ -1892,14 +2420,13 @@
           </ul>
         </div>
 
-        <div class="tl-item" data-reveal="slide-right" data-reveal-delay="300">
-          <div class="e-period">MAY 2023 — JUL 2023</div>
-          <div class="e-role">Social Media & Influencer Outreach Intern</div>
-          <div class="e-company">Netro.io</div>
+        <div class="tl-item" data-reveal="slide-right" data-reveal-delay="350">
+          <div class="e-period">2024</div>
+          <div class="e-role">Software Development Program</div>
+          <div class="e-company">Scaler Academy</div>
           <ul class="e-points">
-            <li>Managed social media presence and content calendar</li>
-            <li>Executed influencer outreach campaigns for brand awareness</li>
-            <li>Analyzed engagement metrics and optimized content strategy</li>
+            <li>Structured training in DSA, full-stack development, and system design fundamentals</li>
+            <li>Built the technical foundation that later powered NitroCapital's full-stack build</li>
           </ul>
         </div>
 
@@ -2032,8 +2559,48 @@
       <div class="divider-line"></div>
     </div>
 
+    <!-- ─── SECOND BRAIN / RABBIT HOLE ─── -->
+    <section id="rabbithole">
+      <div class="p-head" data-reveal="slide-up">
+        <div class="p-label">
+          <span class="orbit-accent"></span>
+          Open tabs of my mind
+        </div>
+        <h2 class="p-title">SECOND<br>BRAIN.</h2>
+      </div>
+      <p class="c-sub" data-reveal="fade" data-reveal-delay="100" style="margin-bottom:0;">
+        Drag a node. Click it open. This is the unfiltered list — movies, books, shows, subreddits,
+        sites, and people I keep coming back to. The connections are vibes-based, not logic-based.
+        Don't read too much into the wiring.
+      </p>
+      <div class="brain-wrap" id="brainWrap" data-reveal="fade" data-reveal-delay="200">
+        <svg class="brain-svg" id="brainSvg"></svg>
+        <div class="brain-panel" id="brainPanel">
+          <button class="bp-close" id="brainPanelClose" aria-label="Close">✕</button>
+          <div class="bp-cat" id="bpCat"></div>
+          <div class="bp-title" id="bpTitle"></div>
+          <div class="bp-note" id="bpNote"></div>
+        </div>
+        <div class="brain-hint">Drag · Click · Repeat</div>
+      </div>
+      <div class="brain-legend" data-reveal="fade" data-reveal-delay="300">
+        <span><i style="background:var(--color-accent-sun)"></i> Me</span>
+        <span><i style="background:var(--color-accent-cyan)"></i> Movies & People</span>
+        <span><i style="background:var(--color-accent-gold)"></i> Books</span>
+        <span><i style="background:var(--color-accent-orange)"></i> Series & Games</span>
+        <span><i style="background:#fff"></i> Sites & Subreddits</span>
+      </div>
+    </section>
+
+    <div class="section-divider" data-reveal="fade">
+      <div class="divider-line"></div>
+      <div class="orbit-ring"></div>
+      <div class="divider-line"></div>
+    </div>
+
     <!-- ─── CONTACT ─── -->
     <section id="contact">
+      <div id="earth-horizon"></div>
       <div class="c-label" data-reveal="fade">Let's connect</div>
       <h2 class="c-head" data-reveal="slide-up">
         LET'S<br><span class="acc">TALK.</span>
@@ -2043,10 +2610,10 @@
         If something fits — or you just want to talk — reach out.
       </p>
       <div class="c-links" data-reveal="fade" data-reveal-delay="400">
-        <a href="https://www.linkedin.com/in/vishal-tomar000/" target="_blank" class="btn btn-primary">
+        <a href="https://www.linkedin.com/in/vishal-tomar000/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
           <i class="fab fa-linkedin-in"></i> LinkedIn
         </a>
-        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=vishaltomar196@email.com" target="_blank" class="btn btn-outline">
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=vishaltomar196@email.com" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
           <i class="far fa-envelope"></i> Email
         </a>
       </div>
@@ -2101,8 +2668,8 @@
   const isSmall = window.innerWidth <= 480;
   
   // Reduce stars on mobile for performance
-  let starCount = isMobile ? 80 : 180;
-  if (isSmall) starCount = 50;
+  let starCount = isMobile ? 140 : 320;
+  if (isSmall) starCount = 90;
 
   for (let i = 0; i < starCount; i++) {
     const star = document.createElement('div');
@@ -2140,8 +2707,8 @@
   function updateParallax() {
     targetY = window.scrollY * 0.15; // Subtle parallax
     currentY += (targetY - currentY) * 0.08; // Smooth interpolation
-    
-    parallaxLayer.style.transform = `translateY(${-currentY}px)`;
+
+    parallaxLayer.dataset.scrollY = -currentY;
     ticking = false;
   }
 
@@ -2257,34 +2824,95 @@
 })();
 
 /* ════════════════════════════════════════════════════
-   CUSTOM CURSOR — Cosmic star trail
+   TOOLKIT CHIPS — Unique hover animation per chip
    ════════════════════════════════════════════════════ */
 (function() {
-  const dot = document.getElementById('cur');
-  const ring = document.getElementById('cur-ring');
-  if (!dot || !ring) return;
+  const chips = document.querySelectorAll('.sk-list .chip');
+  if (!chips.length) return;
 
-  let mx = 0, my = 0, rx = 0, ry = 0;
-  let hoverIntensity = 0;
+  const anims = ['anim-bounce','anim-wave','anim-pulse','anim-shrink','anim-drift','anim-spinsm','anim-spinneg','anim-float','anim-boom','anim-tilt','anim-slide','anim-jelly'];
+
+  function shuffled(arr) {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  let animPool = shuffled(anims);
+
+  chips.forEach(chip => {
+    if (animPool.length === 0) animPool = shuffled(anims);
+    chip.classList.add(animPool.pop());
+  });
+})();
+
+
+/* ════════════════════════════════════════════════════
+   CUSTOM CURSOR — Tiny rocket that blasts off periodically
+   ════════════════════════════════════════════════════ */
+(function() {
+  const cur = document.getElementById('cur');
+  if (!cur) return;
+
+  let mx = window.innerWidth / 2, my = window.innerHeight / 2;
+  let active = true;
 
   document.addEventListener('mousemove', e => {
     mx = e.clientX;
     my = e.clientY;
-    dot.style.transform = `translate(${mx - 3}px, ${my - 3}px)`;
+    if (active) {
+      cur.style.transform = `translate(${mx - 11}px, ${my - 11}px)`;
+    }
   });
 
-  document.addEventListener('mouseenter', () => { hoverIntensity = 1; });
-  document.addEventListener('mouseleave', () => { hoverIntensity = 0; });
+  function cycle() {
+    active = false;
+    cur.classList.add('blast-off');
 
-  (function animRing() {
-    rx += (mx - rx) * 0.12;
-    ry += (my - ry) * 0.12;
-    const scale = 1 + hoverIntensity * 0.25;
-    ring.style.transform = `translate(${rx - 16}px, ${ry - 16}px) scale(${scale})`;
-    ring.style.borderColor = hoverIntensity > 0.5 
-      ? 'rgba(245,166,35,0.6)' 
-      : 'rgba(245,166,35,0.2)';
-    requestAnimationFrame(animRing);
+    setTimeout(() => {
+      cur.classList.add('hidden-cur');
+      cur.classList.remove('blast-off');
+      cur.style.transition = 'none';
+      cur.style.transform = `translate(${mx - 11}px, ${my - 11}px)`;
+
+      setTimeout(() => {
+        cur.style.transition = 'opacity 0.4s ease, transform 0.9s cubic-bezier(.3,.6,.4,1)';
+        cur.classList.remove('hidden-cur');
+        active = true;
+        setTimeout(cycle, 30000);
+      }, 5000);
+    }, 900);
+  }
+
+  setTimeout(cycle, 30000);
+})();
+
+/* ════════════════════════════════════════════════════
+   BACKGROUND REACTION — Cosmic layer follows cursor
+   ════════════════════════════════════════════════════ */
+(function() {
+  const parallaxLayer = document.getElementById('parallax-layer');
+  if (!parallaxLayer) return;
+
+  let mx = window.innerWidth / 2, my = window.innerHeight / 2;
+  let cx = mx, cy = my;
+
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+
+  (function loop() {
+    cx += (mx - cx) * 0.05;
+    cy += (my - cy) * 0.05;
+
+    const nx = (cx / window.innerWidth) - 0.5;   // -0.5 .. 0.5
+    const ny = (cy / window.innerHeight) - 0.5;
+
+    const scrollOffset = parallaxLayer.dataset.scrollY || 0;
+    parallaxLayer.style.transform = `translate(${nx * -30}px, ${(parseFloat(scrollOffset) || 0) + ny * -30}px)`;
+
+    requestAnimationFrame(loop);
   })();
 })();
 
@@ -2292,7 +2920,7 @@
    KEYBOARD NAVIGATION — Arrow keys between sections
    ════════════════════════════════════════════════════ */
 (function() {
-  const order = ['hero','about','work','experience','skills','contact'];
+  const order = ['hero','about','work','experience','skills','rabbithole','contact'];
 
   document.addEventListener('keydown', e => {
     if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
@@ -2322,6 +2950,226 @@
 })();
 
 /* ════════════════════════════════════════════════════
+   SECOND BRAIN — Obsidian-style force graph
+   ════════════════════════════════════════════════════ */
+(function() {
+  const wrap = document.getElementById('brainWrap');
+  if (!wrap) return;
+
+  const svg = document.getElementById('brainSvg');
+  const panel = document.getElementById('brainPanel');
+  const bpCat = document.getElementById('bpCat');
+  const bpTitle = document.getElementById('bpTitle');
+  const bpNote = document.getElementById('bpNote');
+  const closeBtn = document.getElementById('brainPanelClose');
+
+  const catLabels = {
+    center: 'Me', movies: 'Movie', books: 'Book', series: 'Series',
+    reddit: 'Subreddit', web: 'Website / Tool', people: 'Person / Poet', games: 'Game'
+  };
+
+  // ── PLACEHOLDER CONTENT — edit freely, this is the "vomit your brain" list ──
+  const brainData = {
+    nodes: [
+      { id: 'me', label: 'VISHAL', cat: 'center', note: '' },
+      { id: 'm1', label: 'Interstellar', cat: 'movies', note: 'Cried. Then immediately fact-checked the relativity. It mostly holds up.' },
+      { id: 'm2', label: 'The Social Network', cat: 'movies', note: 'Every founder origin story is secretly this movie with the names swapped.' },
+      { id: 'm3', label: 'Whiplash', cat: 'movies', note: 'Anxiety, but make it a drum solo.' },
+      { id: 'm4', label: 'Oldboy', cat: 'movies', note: 'Watched it once. Will not be watching again. Will not be explaining why.' },
+      { id: 'b1', label: 'Sapiens', cat: 'books', note: 'The book that made everyone insufferable at dinner parties for a year. Including me.' },
+      { id: 'b2', label: 'Zero to One', cat: 'books', note: 'Read this right before building NitroCapital. Coincidence? Also no.' },
+      { id: 'b3', label: 'The Alchemist', cat: 'books', note: 'Read it at sixteen, re-read it at twenty-two, judged myself both times.' },
+      { id: 'b4', label: 'Thinking, Fast and Slow', cat: 'books', note: 'Explains why ninety percent of my decisions happen at 1am.' },
+      { id: 's1', label: 'Dark', cat: 'series', note: 'A German show about time travel that somehow made me better at systems thinking.' },
+      { id: 's2', label: 'Mr. Robot', cat: 'series', note: 'Watched this during my "I should learn to code" arc. The arc is ongoing.' },
+      { id: 's3', label: 'Severance', cat: 'series', note: 'The most accurate depiction of corporate life I have seen, and it is a sci-fi show.' },
+      { id: 'r1', label: 'r/IndiaInvestments', cat: 'reddit', note: 'Taught me more about personal finance than any internship did.' },
+      { id: 'r2', label: 'r/startups', cat: 'reddit', note: 'Ninety percent cope, ten percent genuinely useful. I am here for the ten.' },
+      { id: 'r3', label: 'r/ExperiencedDevs', cat: 'reddit', note: 'I am not a dev. I lurk anyway. The discourse is better over there.' },
+      { id: 'w1', label: 'Are.na', cat: 'web', note: 'A mood board for people who think mood boards are beneath them.' },
+      { id: 'w2', label: 'Hacker News', cat: 'web', note: 'I open it, read three comments, close ten tabs, and feel informed.' },
+      { id: 'w3', label: 'Readwise', cat: 'web', note: 'Where my highlights go to be forgotten, then resurface at 2am.' },
+      { id: 'p1', label: 'Rumi', cat: 'people', note: 'Eight hundred years dead and still better at one-liners than most of LinkedIn.' },
+      { id: 'g1', label: 'Hades', cat: 'games', note: 'Proof a roguelike can be a love letter to mythology and a therapy session at once.' }
+    ],
+    edges: [
+      ['me','m1'], ['me','m2'], ['me','m3'], ['me','m4'],
+      ['me','b1'], ['me','b2'], ['me','b3'], ['me','b4'],
+      ['me','s1'], ['me','s2'], ['me','s3'],
+      ['me','r1'], ['me','r2'], ['me','r3'],
+      ['me','w1'], ['me','w2'], ['me','w3'],
+      ['me','p1'], ['me','g1'],
+      ['b2','m2'], ['s1','b4'], ['s3','b4'], ['r2','b2'], ['w2','r3'], ['p1','b3'], ['s2','w2']
+    ]
+  };
+
+  let W = wrap.clientWidth, H = wrap.clientHeight;
+
+  const nodes = brainData.nodes.map((n, i) => {
+    if (n.id === 'me') return { ...n, x: W / 2, y: H / 2, vx: 0, vy: 0, fixed: true, el: null };
+    const angle = (i / (brainData.nodes.length - 1)) * Math.PI * 2;
+    const r = Math.min(W, H) * 0.35;
+    return { ...n, x: W / 2 + Math.cos(angle) * r, y: H / 2 + Math.sin(angle) * r, vx: 0, vy: 0, fixed: false, el: null };
+  });
+  const nodeMap = {};
+  nodes.forEach(n => nodeMap[n.id] = n);
+
+  // Build node elements
+  nodes.forEach(n => {
+    const el = document.createElement('div');
+    el.className = 'brain-node' + (n.id === 'me' ? ' center' : '');
+    el.dataset.cat = n.cat;
+    el.textContent = n.label;
+    wrap.appendChild(el);
+    n.el = el;
+  });
+
+  // Build edge lines
+  const edgeEls = brainData.edges.map(([a, b]) => {
+    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    line.setAttribute('class', 'brain-edge');
+    svg.appendChild(line);
+    return { a, b, el: line };
+  });
+
+  let dragNode = null, dragOffsetX = 0, dragOffsetY = 0, activeId = null;
+
+  function getPointerPos(e) {
+    const rect = wrap.getBoundingClientRect();
+    const t = e.touches ? e.touches[0] : e;
+    return { x: t.clientX - rect.left, y: t.clientY - rect.top };
+  }
+
+  nodes.forEach(n => {
+    const startDrag = (e) => {
+      dragNode = n;
+      n.fixed = true;
+      const p = getPointerPos(e);
+      dragOffsetX = n.x - p.x;
+      dragOffsetY = n.y - p.y;
+      e.preventDefault();
+    };
+    n.el.addEventListener('mousedown', startDrag);
+    n.el.addEventListener('touchstart', startDrag, { passive: false });
+
+    n.el.addEventListener('click', () => {
+      if (n.id === 'me') return;
+      activeId = (activeId === n.id) ? null : n.id;
+      updateActive();
+    });
+  });
+
+  window.addEventListener('mousemove', onMove);
+  window.addEventListener('touchmove', onMove, { passive: false });
+  window.addEventListener('mouseup', onUp);
+  window.addEventListener('touchend', onUp);
+
+  function onMove(e) {
+    if (!dragNode) return;
+    const p = getPointerPos(e);
+    dragNode.x = p.x + dragOffsetX;
+    dragNode.y = p.y + dragOffsetY;
+    dragNode.vx = 0;
+    dragNode.vy = 0;
+    e.preventDefault();
+  }
+
+  function onUp() {
+    if (dragNode && dragNode.id !== 'me') dragNode.fixed = false;
+    dragNode = null;
+  }
+
+  function isConnected(idA, idB) {
+    return brainData.edges.some(([a, b]) => (a === idA && b === idB) || (a === idB && b === idA));
+  }
+
+  function updateActive() {
+    nodes.forEach(n => {
+      n.el.classList.toggle('active', n.id === activeId);
+      const shouldDim = activeId && n.id !== activeId && n.id !== 'me' && !isConnected(activeId, n.id);
+      n.el.classList.toggle('dim', !!shouldDim);
+    });
+    edgeEls.forEach(e => {
+      e.el.classList.toggle('lit', !!(activeId && (e.a === activeId || e.b === activeId)));
+    });
+    if (activeId) {
+      const n = nodeMap[activeId];
+      bpCat.textContent = catLabels[n.cat] || '';
+      bpTitle.textContent = n.label;
+      bpNote.textContent = n.note;
+      panel.classList.add('show');
+    } else {
+      panel.classList.remove('show');
+    }
+  }
+
+  closeBtn.addEventListener('click', () => { activeId = null; updateActive(); });
+
+  function tick() {
+    const repulsion = 1800;
+    const springLen = Math.min(W, H) * 0.22;
+    const springK = 0.02;
+    const centerK = 0.0015;
+    const damping = 0.85;
+
+    nodes.forEach(a => {
+      if (a.fixed) return;
+      let fx = 0, fy = 0;
+      nodes.forEach(b => {
+        if (a === b) return;
+        const dx = a.x - b.x, dy = a.y - b.y;
+        const distSq = dx * dx + dy * dy || 0.01;
+        const dist = Math.sqrt(distSq);
+        const force = repulsion / distSq;
+        fx += (dx / dist) * force;
+        fy += (dy / dist) * force;
+      });
+      fx += (W / 2 - a.x) * centerK;
+      fy += (H / 2 - a.y) * centerK;
+      a.vx = (a.vx + fx) * damping;
+      a.vy = (a.vy + fy) * damping;
+    });
+
+    brainData.edges.forEach(([aId, bId]) => {
+      const a = nodeMap[aId], b = nodeMap[bId];
+      const dx = b.x - a.x, dy = b.y - a.y;
+      const dist = Math.sqrt(dx * dx + dy * dy) || 0.01;
+      const diff = (dist - springLen) * springK;
+      const fx = (dx / dist) * diff, fy = (dy / dist) * diff;
+      if (!a.fixed) { a.vx += fx; a.vy += fy; }
+      if (!b.fixed) { b.vx -= fx; b.vy -= fy; }
+    });
+
+    nodes.forEach(n => {
+      if (n.fixed) return;
+      n.x += n.vx;
+      n.y += n.vy;
+      const pad = 40;
+      n.x = Math.max(pad, Math.min(W - pad, n.x));
+      n.y = Math.max(pad, Math.min(H - pad, n.y));
+    });
+
+    nodes.forEach(n => {
+      n.el.style.left = n.x + 'px';
+      n.el.style.top = n.y + 'px';
+    });
+    edgeEls.forEach(e => {
+      const a = nodeMap[e.a], b = nodeMap[e.b];
+      e.el.setAttribute('x1', a.x); e.el.setAttribute('y1', a.y);
+      e.el.setAttribute('x2', b.x); e.el.setAttribute('y2', b.y);
+    });
+
+    requestAnimationFrame(tick);
+  }
+  tick();
+
+  window.addEventListener('resize', () => {
+    W = wrap.clientWidth;
+    H = wrap.clientHeight;
+  }, { passive: true });
+})();
+
+/* ════════════════════════════════════════════════════
    GLOBAL ERROR HANDLER — Fallback
    ════════════════════════════════════════════════════ */
 window.addEventListener('error', function() {
@@ -2331,6 +3179,45 @@ window.addEventListener('error', function() {
     setTimeout(() => { loader.style.display = 'none'; }, 700);
   }
 });
+
+/* ════════════════════════════════════════════════════
+   CASSETTE PLAYER — click to play / cycle tracks
+   ════════════════════════════════════════════════════ */
+(function() {
+  const cassette = document.getElementById('cassette');
+  const audio = document.getElementById('cassetteAudio');
+  const label = document.getElementById('cassetteLabel');
+  if (!cassette || !audio) return;
+
+  // Drop your 3 mp3 files into /assets/music/ with these names
+  const tracks = [
+    { src: 'assets/music/track1.mp3', name: 'TRACK 01' },
+    { src: 'assets/music/track2.mp3', name: 'TRACK 02' },
+    { src: 'assets/music/track3.mp3', name: 'TRACK 03' }
+  ];
+
+  let idx = -1;
+  const defaultLabel = label ? label.textContent : '2×30min';
+
+  cassette.addEventListener('click', () => {
+    idx = (idx + 1) % tracks.length;
+    audio.src = tracks[idx].src;
+    audio.currentTime = 0;
+    audio.play().then(() => {
+      cassette.classList.add('playing');
+      if (label) label.textContent = tracks[idx].name;
+    }).catch(() => {
+      // File missing or blocked — reset visuals
+      cassette.classList.remove('playing');
+      if (label) label.textContent = defaultLabel;
+    });
+  });
+
+  audio.addEventListener('ended', () => {
+    cassette.classList.remove('playing');
+    if (label) label.textContent = defaultLabel;
+  });
+})();
 </script>
 </body>
 </html>
